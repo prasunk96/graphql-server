@@ -7,16 +7,6 @@ const db = new Sequelize('note', null, null, {
   storage: './note.sqlite',
 });
 
-// const AuthorModel = db.define('author', {
-//   firstName: { type: Sequelize.STRING },
-//   lastName: { type: Sequelize.STRING },
-// });
-
-// const PostModel = db.define('post', {
-//   title: { type: Sequelize.STRING },
-//   text: { type: Sequelize.STRING },
-// });
-
 const NoteModel = db.define('note', {
   id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
   text: { type: Sequelize.STRING },
@@ -24,24 +14,19 @@ const NoteModel = db.define('note', {
   priority: { type: Sequelize.STRING }
 });
 
+// It is mandatory to uncomment this block before running the app for the first time.
+/*casual.seed(88);
+db.sync({ force: true }).then(() => {
+  _.times(10, () => {
+    return NoteModel.create({
+      text: casual.sentence,
+      checked: false,
+      priority: "Low"
+    })
+  });
+});
+*/
 
-
-// AuthorModel.hasMany(PostModel);
-// PostModel.belongsTo(AuthorModel);
-
-// casual.seed(88);
-// db.sync({ force: true }).then(() => {
-//   _.times(10, () => {
-//     return NoteModel.create({
-//       text: casual.sentence,
-//       checked: false,
-//       priority: "Low"
-//     })
-//   });
-// });
-
-// const Author = db.models.author;
-// const Post = db.models.post;
 const Note = db.models.note;
 
 module.exports = { Note };
